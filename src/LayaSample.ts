@@ -15,6 +15,8 @@ module laya {
 
             Laya.stage.scaleMode = "showall";
             Laya.stage.bgColor = "#232628";
+
+            Laya.Stat.show();
         }
     }
 

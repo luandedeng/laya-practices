@@ -172,5 +172,19 @@ module laya {
             console.log("current status: " + this._textBox.cacheAsBitmap);
         }
     }
+    export class Timer_CallLater extends BaseObject {
+        constructor() {
+            super();
+            this.demostrate();
+        }
+
+        private demostrate(): void {
+            Laya.timer.callLater(this, this.callLaterFunc);
+        }
+
+        private callLaterFunc(): void {
+            console.log("call later!");
+        }
+    }
 }
-new laya.Sprite_Cache();
+new laya.Timer_CallLater();

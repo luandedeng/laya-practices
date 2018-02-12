@@ -6,6 +6,7 @@ module laya {
     import Texture = Laya.Texture;
     import Handler = Laya.Handler;
     import Rectangle = Laya.Rectangle;
+    import Text = Laya.Text;
 
     class BaseObject {
         public constructor() {
@@ -137,5 +138,39 @@ module laya {
             this._mask.y = Laya.stage.mouseY;
         }
     }
+
+    export class Sprite_Cache extends BaseObject {
+        private _textBox: Sprite;
+        constructor() {
+            super();
+            this.setup();
+        }
+
+        private setup(): void {
+            this._textBox = new Sprite();
+
+            for (let i: number = 0; i < 100; ++i) {
+                let text: Text = new Text();
+
+                text.fontSize = 20;
+                text.color = "#CCCCCC";
+                text.text = (Math.random() * 100).toFixed(0);
+                text.rotation = Math.random() * 360;
+                text.x = Math.random() * Laya.stage.width;
+                text.y = Math.random() * Laya.stage.height;
+
+                this._textBox.addChild(text);
+            }
+
+            Laya.stage.addChild(this._textBox);
+
+            Laya.stage.on(Laya.Event.CLICK, this, this.onMouseClicked);
+        }
+
+        private onMouseClicked(): void {
+            this._textBox.cacheAsBitmap = !this._textBox.cacheAsBitmap; 
+            console.log("current status: " + this._textBox.cacheAsBitmap);
+        }
+    }
 }
-new laya.Sprite_Mask();
+new laya.Sprite_Cache();
